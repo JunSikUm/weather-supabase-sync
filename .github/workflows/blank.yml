@@ -24,6 +24,21 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
+    - name: Debug environment variables
+      run: |
+        echo "🔍 환경변수 설정 확인:"
+        echo "MERTANI_USER_EMAIL 설정됨: ${{ secrets.MERTANI_USER_EMAIL != '' }}"
+        echo "MERTANI_USER_PASSWORD 설정됨: ${{ secrets.MERTANI_USER_PASSWORD != '' }}"
+        echo "SUPABASE_URL 설정됨: ${{ secrets.SUPABASE_URL != '' }}"
+        echo "SUPABASE_KEY 설정됨: ${{ secrets.SUPABASE_KEY != '' }}"
+        echo "MERTANI_COMPANY_ID 설정됨: ${{ secrets.MERTANI_COMPANY_ID != '' }}"
+        echo ""
+        echo "�� 설정되지 않은 Secrets:"
+        if [ -z "${{ secrets.MERTANI_USER_EMAIL }}" ]; then echo "❌ MERTANI_USER_EMAIL"; fi
+        if [ -z "${{ secrets.MERTANI_USER_PASSWORD }}" ]; then echo "❌ MERTANI_USER_PASSWORD"; fi
+        if [ -z "${{ secrets.SUPABASE_URL }}" ]; then echo "❌ SUPABASE_URL"; fi
+        if [ -z "${{ secrets.SUPABASE_KEY }}" ]; then echo "❌ SUPABASE_KEY"; fi
+    
     - name: Create .env file
       run: |
         echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
@@ -48,7 +63,7 @@ jobs:
       with:
         script: |
           console.log('❌ 강우량 데이터 동기화 실패!');
-          console.log('🔍 GitHub Actions 로그를 확인해주세요.');
+          console.log('�� GitHub Actions 로그를 확인해주세요.');
           console.log('📧 주요 확인사항:');
           console.log('  - Mertani 로그인 정보');
           console.log('  - Supabase 연결 정보');
@@ -60,4 +75,4 @@ jobs:
       with:
         script: |
           console.log('✅ 강우량 데이터 동기화 성공!');
-          console.log('📊 Supabase에서 데이터를 확인해주세요.');
+          console.log('�� Supabase에서 데이터를 확인해주세요.');
