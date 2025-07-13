@@ -26,35 +26,24 @@ jobs:
     
     - name: Debug environment variables
       run: |
-        echo "🔍 환경변수 설정 확인:"
-        echo "MERTANI_USER_EMAIL 설정됨: ${{ secrets.MERTANI_USER_EMAIL != '' }}"
-        echo "MERTANI_USER_PASSWORD 설정됨: ${{ secrets.MERTANI_USER_PASSWORD != '' }}"
-        echo "SUPABASE_URL 설정됨: ${{ secrets.SUPABASE_URL != '' }}"
-        echo "SUPABASE_KEY 설정됨: ${{ secrets.SUPABASE_KEY != '' }}"
-        echo "MERTANI_COMPANY_ID 설정됨: ${{ secrets.MERTANI_COMPANY_ID != '' }}"
+        echo "🔍 환경변수 실제 값 확인:"
+        echo "MERTANI_USER_EMAIL: $MERTANI_USER_EMAIL"
+        echo "MERTANI_USER_PASSWORD: $MERTANI_USER_PASSWORD"
+        echo "SUPABASE_URL: $SUPABASE_URL"
+        echo "SUPABASE_KEY: $SUPABASE_KEY"
+        echo "MERTANI_COMPANY_ID: $MERTANI_COMPANY_ID"
         echo ""
-        echo "�� 설정되지 않은 Secrets:"
-        if [ -z "${{ secrets.MERTANI_USER_EMAIL }}" ]; then echo "❌ MERTANI_USER_EMAIL"; fi
-        if [ -z "${{ secrets.MERTANI_USER_PASSWORD }}" ]; then echo "❌ MERTANI_USER_PASSWORD"; fi
-        if [ -z "${{ secrets.SUPABASE_URL }}" ]; then echo "❌ SUPABASE_URL"; fi
-        if [ -z "${{ secrets.SUPABASE_KEY }}" ]; then echo "❌ SUPABASE_KEY"; fi
-    
-    - name: Create .env file
-      run: |
-        echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
-        echo "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}" >> .env
-        echo "MERTANI_USER_EMAIL=${{ secrets.MERTANI_USER_EMAIL }}" >> .env
-        echo "MERTANI_USER_PASSWORD=${{ secrets.MERTANI_USER_PASSWORD }}" >> .env
-        echo "MERTANI_COMPANY_ID=${{ secrets.MERTANI_COMPANY_ID }}" >> .env
-        echo "WEATHER_TABLE_NAME=rainfall_data" >> .env
-    
-    - name: Run rainfall sync
-      run: python sync_weather.py
+        echo "설정되지 않은 환경변수:"
+        [ -z "$MERTANI_USER_EMAIL" ] && echo "❌ MERTANI_USER_EMAIL"
+        [ -z "$MERTANI_USER_PASSWORD" ] && echo "❌ MERTANI_USER_PASSWORD"
+        [ -z "$SUPABASE_URL" ] && echo "❌ SUPABASE_URL"
+        [ -z "$SUPABASE_KEY" ] && echo "❌ SUPABASE_KEY"
+        [ -z "$MERTANI_COMPANY_ID" ] && echo "❌ MERTANI_COMPANY_ID"
       env:
-        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         MERTANI_USER_EMAIL: ${{ secrets.MERTANI_USER_EMAIL }}
         MERTANI_USER_PASSWORD: ${{ secrets.MERTANI_USER_PASSWORD }}
+        SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+        SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
         MERTANI_COMPANY_ID: ${{ secrets.MERTANI_COMPANY_ID }}
     
     - name: Notify on failure
