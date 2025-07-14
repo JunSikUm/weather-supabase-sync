@@ -25,20 +25,6 @@ jobs:
         pip install -r requirements.txt
     
     - name: Debug environment variables
-      run: |
-        echo "🔍 환경변수 실제 값 확인:"
-        echo "MERTANI_USER_EMAIL: $MERTANI_USER_EMAIL"
-        echo "MERTANI_USER_PASSWORD: $MERTANI_USER_PASSWORD"
-        echo "SUPABASE_URL: $SUPABASE_URL"
-        echo "SUPABASE_KEY: $SUPABASE_KEY"
-        echo "MERTANI_COMPANY_ID: $MERTANI_COMPANY_ID"
-        echo ""
-        echo "설정되지 않은 환경변수:"
-        [ -z "$MERTANI_USER_EMAIL" ] && echo "❌ MERTANI_USER_EMAIL"
-        [ -z "$MERTANI_USER_PASSWORD" ] && echo "❌ MERTANI_USER_PASSWORD"
-        [ -z "$SUPABASE_URL" ] && echo "❌ SUPABASE_URL"
-        [ -z "$SUPABASE_KEY" ] && echo "❌ SUPABASE_KEY"
-        [ -z "$MERTANI_COMPANY_ID" ] && echo "❌ MERTANI_COMPANY_ID"
       env:
         MERTANI_USER_EMAIL: ${{ secrets.MERTANI_USER_EMAIL }}
         MERTANI_USER_PASSWORD: ${{ secrets.MERTANI_USER_PASSWORD }}
