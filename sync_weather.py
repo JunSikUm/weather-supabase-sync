@@ -3,7 +3,6 @@ import json
 import http.client
 import urllib.parse
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
 from typing import Dict, Any, List, Optional
 from supabase import create_client, Client
 import concurrent.futures
@@ -11,8 +10,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
 import hashlib
 
-# 환경 변수 로드
-load_dotenv()
 
 class MertaniRainfallAPI:
     def __init__(self, base_url: str = "https://data.mertani.co.id"):
@@ -443,3 +440,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
