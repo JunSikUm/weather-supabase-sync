@@ -1,2 +1,3 @@
 supabase==2.0.2
 python-dotenv==1.0.0
+postgrest-py==0.13.2
