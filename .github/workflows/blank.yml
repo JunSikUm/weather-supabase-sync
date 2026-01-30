@@ -55,9 +55,9 @@ jobs:
       uses: actions/github-script@v7
       with:
         script: |
-          console.log('❌ 강우량 데이터 동기화 실패!');
-          console.log('🔍 GitHub Actions 로그를 확인해주세요.');
-          console.log('📧 주요 확인사항:');
+          console.log(' 강우량 데이터 동기화 실패!');
+          console.log(' GitHub Actions 로그를 확인해주세요.');
+          console.log(' 주요 확인사항:');
           console.log('  - Mertani 로그인 정보');
           console.log('  - Supabase 연결 정보');
           console.log('  - 센서 데이터 존재 여부');
@@ -67,5 +67,4 @@ jobs:
       uses: actions/github-script@v7
       with:
         script: |
-          console.log('✅ 강우량 데이터 동기화 성공!');
-          console.log('📊 Supabase에서 데이터를 확인해주세요.');
+          console.log(' Success Sync Finish');
